@@ -1,0 +1,64 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>My first DevExtreme SPA Application</title>
+
+    <!-- devextreme styles-->
+    <link rel="stylesheet" type="text/css" href="lib/devextreme/dist/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="lib/devextreme/dist/css/dx.spa.css" />
+    <link rel="dx-theme" data-theme="android5.light" href="lib/devextreme/dist/css/dx.android5.light.css" />
+    <link rel="dx-theme" data-theme="ios7.default" href="lib/devextreme/dist/css/dx.ios7.default.css" />
+    <link rel="dx-theme" data-theme="win10.black" href="lib/devextreme/dist/css/dx.win10.black.css" />
+    <link rel="dx-theme" data-theme="generic.light" href="lib/devextreme/dist/css/dx.light.css" />
+
+    <!-- combined devextreme views -->
+    <link rel="dx-template" type="text/html" href="views.html" />
+
+    <environment names="Development">
+        <script src="lib/devextreme/dist/js/jquery-2.2.3.js"></script>
+        <script src="lib/devextreme/dist/js/knockout-3.4.0.debug.js"></script>
+        <script src="lib/devextreme/dist/js/dx.all.debug.js"></script>
+        <script src="js/site.js" asp-append-version="true"></script>
+        <!-- devextreme layout: simple -->
+        <script src="lib/devextreme/dist/layouts/Simple/SimpleLayout.js"></script>
+        <link rel="dx-template" type="text/html" href="lib/devextreme/dist/layouts/Simple/SimpleLayout.html" />
+        <link rel="stylesheet" type="text/css" href="lib/devextreme/dist/layouts/Simple/SimpleLayout.css" />
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.3.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.0.js"></script>
+        <script src="//cdn3.devexpress.com/jslib/16.2.4/js/dx.all.js"></script>
+        <script src="js/site.min.js" asp-append-version="true"></script>
+        <!-- devextreme layout: simple -->
+        <script src="//cdn3.devexpress.com/jslib/16.2.4/layouts/Simple/SimpleLayout.js"></script>
+        <link rel="dx-template" type="text/html" href="//cdn3.devexpress.com/jslib/16.2.4/layouts/Simple/SimpleLayout.html" />
+        <link rel="stylesheet" type="text/css" href="//cdn3.devexpress.com/jslib/16.2.4/layouts/Simple/SimpleLayout.css" />
+    </environment>
+
+    
+    <!-- this will boot the SPA -->
+    <script type="text/javascript">
+        window.dxSample = {};
+
+        $(function () {
+            dxSample.app = new DevExpress.framework.html.HtmlApplication({
+                namespace: dxSample, // my namespace for this SPA
+                layoutSet: DevExpress.framework.html.layoutSets["simple"] // references the layout. Requires respective html/js/css from ~/lib/devextreme/dist/layouts/* to be imported in Home.cshtml
+            });
+
+            // enable client side routing with template and "#home" as default route
+            dxSample.app.router.register(":view/:name", { view: "home", name: "" });
+
+            // navigate to default route, which is /#home
+            dxSample.app.navigate();
+        });
+    </script>
+</head>
+
+<body>
+</body>
+</html>
