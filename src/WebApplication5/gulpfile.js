@@ -56,13 +56,13 @@ gulp.task("concat:css", function () {
 
 gulp.task("min:js", function () {
   return gulp.src([paths.js], { base: "." })
-    .pipe(concat(paths.concatJsMinDest))
+    .pipe(concat(paths.concatMinJsDest))
     .pipe(uglify())
     .pipe(gulp.dest("."));
 });
 
 gulp.task("min:css", function () {
-  return gulp.src([paths.css, "!" + paths.minCss])
+  return gulp.src([paths.css], { base: "." })
     .pipe(concat(paths.concatMinCssDest))
     .pipe(cssmin())
     .pipe(gulp.dest("."));
