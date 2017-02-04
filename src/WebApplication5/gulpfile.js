@@ -15,12 +15,10 @@ paths.html = paths.webroot + "lib/spa/html/**/*.html";
 paths.concatHtmlDest = paths.webroot + "views.html";
 
 paths.js = paths.webroot + "lib/spa/js/**/*.js";
-paths.minJs = paths.webroot + "lib/spa/js/**/*.min.js";
 paths.concatJsDest = paths.webroot + "js/site.js";
 paths.concatMinJsDest = paths.webroot + "js/site.min.js";
 
 paths.css = paths.webroot + "lib/spa/css/**/*.css";
-paths.minCss = paths.webroot + "lib/spa/css/**/*.min.css";
 paths.concatCssDest = paths.webroot + "css/site.css";
 paths.concatMinCssDest = paths.webroot + "css/site.min.css";
 
@@ -45,19 +43,19 @@ gulp.task("concat:html", function () {
 });
 
 gulp.task("concat:js", function () {
-    return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
+    return gulp.src([paths.js], { base: "." })
       .pipe(concat(paths.concatJsDest))
       .pipe(gulp.dest("."));
 });
 
 gulp.task("concat:css", function () {
-    return gulp.src([paths.css, "!" + paths.minCss])
+    return gulp.src([paths.css], { base: "." })
       .pipe(concat(paths.concatCssDest))
       .pipe(gulp.dest("."));
 });
 
 gulp.task("min:js", function () {
-  return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
+  return gulp.src([paths.js], { base: "." })
     .pipe(concat(paths.concatJsMinDest))
     .pipe(uglify())
     .pipe(gulp.dest("."));
